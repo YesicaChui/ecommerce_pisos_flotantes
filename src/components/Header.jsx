@@ -1,8 +1,8 @@
 import React from 'react'
-import account from '../../assets/mdi_account-alert-outline.png'
-import search from '../../assets/akar-icons_search.png'
-import heart from '../../assets/akar-icons_heart.png'
-import cart from '../../assets/ant-design_shopping-cart-outlined.png'
+import account from '../assets/mdi_account-alert-outline.png'
+import search from '../assets/akar-icons_search.png'
+import heart from '../assets/akar-icons_heart.png'
+import cart from '../assets/ant-design_shopping-cart-outlined.png'
 
 export const Header = () => {
   return (
