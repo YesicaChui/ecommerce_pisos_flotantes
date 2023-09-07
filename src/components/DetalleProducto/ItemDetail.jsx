@@ -1,10 +1,12 @@
 import React, { useContext, useState } from 'react'
 import { ItemCount } from './ItemCount'
 import { MiInputButton } from '../ui/MiInputButton'
+import { CartContext } from '../../context/CartContext'
 // import { CartContext } from '../context/CartContext'
 
 export const ItemDetail = ({ producto }) => {
   const [cantidad, setCantidad] = useState(1)
+  const { agregar } = useContext(CartContext)
   //const { agregar } = useContext(CartContext)
 
   return (
@@ -21,7 +23,7 @@ export const ItemDetail = ({ producto }) => {
       <ItemCount stock={producto.stock} cantidad={cantidad} setCantidad={setCantidad} />
       <br />
       {/* <button className='button' onClick={() => agregar(producto, cantidad)} >Agregar</button> */}
-      <MiInputButton type={"button"} value={"Agregar"} myStyles={'w-40'}/>
+      <MiInputButton type={"button"} value={"Agregar"} myStyles={'w-40'} onClick={() => agregar(producto, cantidad)}/>
     </div>
   )
 }
