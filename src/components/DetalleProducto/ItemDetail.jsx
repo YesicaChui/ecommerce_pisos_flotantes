@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { ItemCount } from './ItemCount'
+import { ItemCount } from '../ItemCount'
 import { MiInputButton } from '../ui/MiInputButton'
 import { CartContext } from '../../context/CartContext'
 // import { CartContext } from '../context/CartContext'

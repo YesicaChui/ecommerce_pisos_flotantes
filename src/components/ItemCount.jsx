@@ -1,5 +1,5 @@
 import React from 'react'
-import { MiInputButton } from '../ui/MiInputButton'
+import { MiInputButton } from './ui/MiInputButton'
 
 export const ItemCount = ({ stock, cantidad, setCantidad }) => {
 
