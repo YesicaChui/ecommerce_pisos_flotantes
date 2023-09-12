@@ -1,24 +1,18 @@
 import { useEffect, useState } from "react"
-import { pedirDatos } from "../services/services"
+import { pedirDatos } from "../services/servicesJson"
 
-export const useProductos = ({id,idDetail}) => {
+export const useProductos = ({id,type}) => {
   const [productos, setProductos] = useState([])
   useEffect(() => {
-    pedirDatos()
+    pedirDatos(id, type)
       .then((res) => {
-        console.log(res)
-        console.log(idDetail)
-        if(idDetail){
-          setProductos(res.find(prod=>prod.id===Number(idDetail)))
-        }else{
-          id?setProductos(res.filter(prod=>prod.category===id)):setProductos(res)
-        }
+        setProductos(res)
         
       })
       .catch((error) => {
         console.log(error)
       })
-  }, [id,idDetail])
+  }, [id])
 
   return {productos}
 }
