@@ -72,33 +72,56 @@ export const createOrder=(order)=>{
 }
 
 export const signIn=async (email,password)=>{
-  try{
-    const credentialsUser = await signInWithEmailAndPassword(auth, email, password)
-    const user = credentialsUser.user;
-    const miuser = {
-      email: user.email,
-      id: user.uid
+  try {
+    await signInWithEmailAndPassword(auth, email, password)
+    //recuperando datos de la base de datos
+    const userRef = collection(db, "users")
+    const consulta = query(userRef, where("email", "==", email))
+
+    const data = await getDocs(consulta)
+    if (!data.empty) {
+      // La consulta tiene resultados, toma el primer documento encontrado (si esperas uno)
+      const docSnap = data.docs[0];
+
+      // Combina el ID del documento con los datos
+      const userData = {
+        id: docSnap.id,
+        ...docSnap.data()
+      };
+
+      console.log('Datos del documento:', userData);
+      return userData
+    } else {
+      console.log('No se encontraron documentos con ese correo.');
+      throw 'No se encontraron documentos con ese correo.'
     }
-    console.log("los credenciales user son:", user)
-    console.log("los credenciales son:", credentialsUser) 
-    return miuser
+
   }catch(e){
     console.log("ocurrio un error firebase:",e)
     throw e;
   }
 }
-export const signUp=async (email,password)=>{
-  try{
+export const signUp=async (form)=>{
+  try {
+    const {email,password} =form
     const credentialsUser = await createUserWithEmailAndPassword(auth, email, password)
     const user = credentialsUser.user;
-    const miuser = {
-      email: user.email,
-      id: user.uid
+    delete form.password;
+    const newUser = {
+      uid: user.uid,
+      rol:"user",
+      ...form      
     }
+    //guardando en la base de datos
+    const reference = collection(db, 'users')
+    const response = await addDoc(reference, newUser)
     console.log("los credenciales user son:", user)
-    console.log("los credenciales son:", credentialsUser) 
-    return miuser
-  }catch(e){
+    console.log(user.email, user.uid)
+    return {
+      id: response.id,
+      ...newUser      
+    }
+  } catch(e){
     console.log("ocurrio un error firebase:",e)
     throw e;
   }

@@ -14,9 +14,9 @@ export const useUser = () => {
       console.log("ocurrio un error:", e)
     }
   }
-  const register = async (email, password) => {
+  const register = async (form) => {
     try {
-      const miuser=await signUp( email, password)
+      const miuser=await signUp(form)
       storeUser(miuser)
       navigate('/')
     } catch (e) {

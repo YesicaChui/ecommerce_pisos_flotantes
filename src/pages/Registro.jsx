@@ -10,6 +10,9 @@ export const Registro = () => {
   const [form, setForm] = useState({
     email: '',
     password: '',
+    address: '',
+    firstname: '',
+    lastname: '',
   })
 
   const handleChange = (event) => {
@@ -21,9 +24,7 @@ export const Registro = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    const {email, password} = form
-    await register(email,password)
+    await register(form)
 
   }
 
@@ -32,7 +33,9 @@ export const Registro = () => {
       <Banner text={"Registro de Clientes"} />
       <form className='bg-white w-80 mx-auto mt-8 rounded p-6' onSubmit={handleSubmit}>
         <h2 className='text-2xl font-bold mb-4 text-center' >Registro</h2>
-        <MiInput type={'text'} placeholder={'Nombre'} />
+        <MiInput type={'text'} placeholder={'Nombre'} name={"firstname"} onChange={handleChange} value={form?.firstname} />
+        <MiInput type={'text'} placeholder={'Apellidos'} name={"lastname"} onChange={handleChange} value={form?.lastname} />
+        <MiInput type={'text'} placeholder={'Dirección de Envio'} name={"address"} onChange={handleChange} value={form?.address} />
         <MiInput type={'email'} placeholder={'Correo'} name={"email"} onChange={handleChange} value={form?.email}/>
         <MiInput type={'password'} placeholder={'Contraseña'} name={"password"} onChange={handleChange} value={form?.password} />
         <MiInputButton type={"submit"} value={"Registro"} myStyles={'mb-1 w-full'}/>

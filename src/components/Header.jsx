@@ -23,15 +23,19 @@ export const Header = () => {
       <nav className='flex justify-between gap-10'>
         <Link to={"/"}>Inicio</Link>
         <Link to={"/"}>Tienda</Link>
-        <Link to={"/"}>Administrar Productos</Link>
-        <Link to={"/"}>Administrar Categorias</Link>
+        {user && user.rol === "admin"
+          ? <>
+            <Link to={"/"}>Administrar Productos</Link>
+          </>
+          : ""
+        }
       </nav>
       <div className='flex justify-between gap-10 items-center'>
         <img src={search} alt="" />
         <div className='group relative'>
           {!user
             ? <img src={account} alt="" />
-            : <div className='bg-blue-500 rounded-full w-7 h-7 flex justify-center items-center font-bold text-teal-50 capitalize'>{user.email[0]}</div>}
+            : <div className='bg-blue-500 rounded-full w-7 h-7 flex justify-center items-center font-bold text-teal-50 capitalize'>{user.firstname[0]}</div>}
 
           <div id="dropdownNavbar" className="z-10 hidden absolute group-hover:block  bg-white  rounded-lg shadow w-32">
             <ul className="py-2 text-sm text-gray-700 dark:text-gray-400" >
@@ -46,7 +50,7 @@ export const Header = () => {
                 </>
                 : <>
                   <li>
-                    <a href="#" className="block px-4 py-2 hover:bg-gray-100 ">Mi Perfil</a>
+                    <Link to={"/perfil"} className="block px-4 py-2 hover:bg-gray-100 ">Mi Perfil </Link>
                   </li>
                   <div className="py-1 ">
                     <div className="block px-4 py-2 text-sm  hover:bg-gray-100 cursor-pointer" onClick={handleLogout} >Cerrar Sesion</div>
