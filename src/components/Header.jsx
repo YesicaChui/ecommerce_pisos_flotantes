@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import account from '../assets/mdi_account-alert-outline.png'
+import logo from '../assets/ngl.jpg'
 import search from '../assets/akar-icons_search.png'
 import heart from '../assets/akar-icons_heart.png'
 import cart from '../assets/ant-design_shopping-cart-outlined.png'
@@ -19,13 +20,16 @@ export const Header = () => {
   }
   return (
     <header className='flex justify-between pt-5 px-10 items-center'>
-      <h1>Ecommerce</h1>
+      <div className='flex items-center gap-5'>
+        <img src={logo} alt="" width={"80px"}/>
+        <h1 className='font-bold text-2xl'>Ecommerce</h1>
+      </div>
       <nav className='flex justify-between gap-10'>
         
-        <Link to={"/"}>Tienda</Link>
+        <Link to={"/"} className='font-bold text-2xl'>Tienda</Link>
         {user && user.rol === "admin"
           ? <>
-            <Link to={"/"}>Administrar Productos</Link>
+            <Link className='font-bold text-2xl' to={"/"}>Administrar Productos</Link>
           </>
           : ""
         }
