@@ -33,8 +33,8 @@ export const Login = () => {
         <h2 className='text-2xl font-bold mb-4 text-center' >Login</h2>
         <MiInput type={'email'} placeholder={'Correo'} name={"email"} onChange={handleChange} value={form?.email} />
         <MiInput type={'password'} placeholder={'Contraseña'} name={"password"} onChange={handleChange} value={form?.password} />
-        <MiInputButton type={"submit"} value={"Ingresar"} myStyles={'mb-1'} />
-        <Link to={"/registro"}><MiInputButton type={"button"} value={"Registarse"} myStyles={'bg-green-500'} /></Link>
+        <MiInputButton type={"submit"} value={"Ingresar"} myStyles={'mb-1 w-full'} />
+        <Link to={"/registro"}><MiInputButton type={"button"} value={"Registarse"} myStyles={'bg-green-500 w-full'} /></Link>
       </form>
     </>
   )

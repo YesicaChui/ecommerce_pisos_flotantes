@@ -35,8 +35,8 @@ export const Registro = () => {
         <MiInput type={'text'} placeholder={'Nombre'} />
         <MiInput type={'email'} placeholder={'Correo'} name={"email"} onChange={handleChange} value={form?.email}/>
         <MiInput type={'password'} placeholder={'Contraseña'} name={"password"} onChange={handleChange} value={form?.password} />
-        <MiInputButton type={"submit"} value={"Registro"} myStyles={'mb-1'}/>
-        <Link to={"/login"}><MiInputButton type={"button"} value={"Volver"} myStyles={'bg-green-500'} /></Link>
+        <MiInputButton type={"submit"} value={"Registro"} myStyles={'mb-1 w-full'}/>
+        <Link to={"/login"}><MiInputButton type={"button"} value={"Volver"} myStyles={'bg-green-500 w-full'} /></Link>
 
       </form>
     </>

@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { CartContext } from '../context/CartContext'
+import { Banner } from '../components/Banner'
 
 import { Link } from 'react-router-dom'
 import { CartViewItem } from '../components/Cart/CartViewItem'
@@ -52,8 +53,8 @@ export const CartPage = () => {
   }
   return (
     <div>
-      <h2> Mi Carrito </h2>
-      <table className='mx-auto'>
+      <Banner text={"Mi Carrito"}/>
+      <table className='mx-auto mt-5'>
         <thead>
           <tr className='border-b-2 border-[#AA5656]'>
             <th>Nº</th>
@@ -67,7 +68,7 @@ export const CartPage = () => {
         </thead>
         <tbody>
           {cart.map((producto, index) => (
-            <CartViewItem producto={producto} key={index} borrarDelCarrito={borrarDelCarrito} />
+            <CartViewItem producto={producto} key={index} index={index}  borrarDelCarrito={borrarDelCarrito} />
           ))}
           <tr className='border-b border-[#AA5656] mt-5' >
             <td></td>
