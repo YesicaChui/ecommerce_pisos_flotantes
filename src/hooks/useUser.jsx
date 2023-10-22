@@ -1,35 +1,32 @@
 import { useNavigate } from "react-router-dom"
-import { auth } from "../services/configFirebase"
-import { createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth"
+import { signIn, signUp,signOut } from "../services/servicesProvider"
 export const useUser = () => {
   const navigate = useNavigate()
   const login = async (email, password) => {
-    try{
-      const credentialsUser = await signInWithEmailAndPassword(auth, email, password)
-      const user = credentialsUser.user;
-      console.log("los credenciales user son:", user)
-      console.log("los credenciales son:", credentialsUser)  
+    try {
+      await signIn( email, password)
       navigate('/')
-    }catch(e){
-      console.log("ocurrio un error:",e)
+    } catch (e) {
+      console.log("ocurrio un error:", e)
     }
   }
   const register = async (email, password) => {
-    try{
-      const credentialsUser = await createUserWithEmailAndPassword(auth, email, password)
-      const user = credentialsUser.user;
-      console.log("los credenciales user son:", user)
-      console.log("los credenciales son:", credentialsUser)   
+    try {
+      await signUp( email, password)
       navigate('/')
-    }catch(e){
-      console.log("ocurrio un error:",e)
+    } catch (e) {
+      console.log("ocurrio un error:", e)
     }
   }
 
   const logout = async () => {
-    await auth.signOut()
-
-    navigate('/login')
+    try{
+      await signOut()
+      navigate('/login')
+    }catch(e){
+      console.log("ocurrio un error:",e)
+      throw e;
+    }
   }
   return {
     login,

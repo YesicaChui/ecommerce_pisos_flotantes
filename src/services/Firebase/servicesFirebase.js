@@ -1,6 +1,7 @@
 import { collection, doc, documentId, getDoc, getDocs, query, where, writeBatch,addDoc } from "firebase/firestore";
 import { db } from "./configFirebase";
-
+import { auth } from "./configFirebase";
+import { createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth"
 
 export const pedirDatos = (id, type) => {
 
@@ -68,4 +69,37 @@ export const createOrder=(order)=>{
       reject("Hay items sin stock")
     }
   })
+}
+
+export const signIn=async (email,password)=>{
+  try{
+    const credentialsUser = await signInWithEmailAndPassword(auth, email, password)
+    const user = credentialsUser.user;
+    console.log("los credenciales user son:", user)
+    console.log("los credenciales son:", credentialsUser) 
+    return user
+  }catch(e){
+    console.log("ocurrio un error firebase:",e)
+    throw e;
+  }
+}
+export const signUp=async (email,password)=>{
+  try{
+    const credentialsUser = await createUserWithEmailAndPassword(auth, email, password)
+    const user = credentialsUser.user;
+    console.log("los credenciales user son:", user)
+    console.log("los credenciales son:", credentialsUser) 
+    return user
+  }catch(e){
+    console.log("ocurrio un error firebase:",e)
+    throw e;
+  }
+}
+export const signOut=async ()=>{
+  try{
+    await auth.signOut()
+  }catch(e){
+    console.log("ocurrio un error firebase:",e)
+    throw e;
+  }
 }

@@ -1,4 +1,4 @@
-import MOCK_DATA from '../data/mock_data.json'
+import MOCK_DATA from '../../data/mock_data.json'
 
 export const pedirDatos = (id, type) => {
   if (type === 'getOne') {
@@ -15,15 +15,15 @@ export const pedirDatos = (id, type) => {
     }, 500)
   })
 }
-export const createOrder=(order)=>{
+export const createOrder = (order) => {
 
-  return new Promise(async(resolve,reject)=>{
+  return new Promise(async (resolve, reject) => {
 
     setTimeout(() => {
 
       console.log(order)
 
-      resolve(Math.floor( Math.random() * 10000))
+      resolve(Math.floor(Math.random() * 10000))
 
     }, 500)
 
