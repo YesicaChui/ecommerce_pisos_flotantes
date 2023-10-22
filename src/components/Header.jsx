@@ -18,11 +18,29 @@ export const Header = () => {
       </nav>
       <div  className='flex justify-between gap-10 items-center'>
         <img src={search} alt="" />
+        <div className='group relative'>
+          <img src={account} alt="" />
+          <div id="dropdownNavbar" className="z-10 hidden absolute group-hover:block font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+            <ul className="py-2 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
+              <li>
+                <Link to={"/login"} className="block px-4 py-2 hover:bg-gray-100 ">Ingresar </Link>
+              </li>
+              <li>
+                <Link to={"/registro"} className="block px-4 py-2 hover:bg-gray-100 ">Registrarse </Link>
+              </li>
+              <li>
+                <a href="#" className="block px-4 py-2 hover:bg-gray-100 ">Mi Perfil</a>
+              </li>
+            </ul>
+            <div className="py-1">
+              <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Cerrar Sesion</a>
+            </div>
+          </div>
+        </div>
         <img src={heart} alt="" />
         <Link to={"/cart"}>
           {<CartWidget />}
         </Link>
-        <Link to={"/login"}> <img src={account} alt="" /></Link>
       </div>
     </header>
   )
