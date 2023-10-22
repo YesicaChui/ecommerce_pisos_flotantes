@@ -34,7 +34,38 @@ export const pedirDatos = (id, type) => {
           resolve(respuesta)
         })
     })
-
-
 }
 
+export const createOrder=(order)=>{
+  return new Promise(async(resolve,reject)=>{
+
+    const batch = writeBatch(db)
+    const ordersRef = collection(db, "orders")
+    const productosRef = collection(db, "productos")
+    const q = query(productosRef, where(documentId(), "in", order.items.map(item => item.id)))
+
+    const productos = await getDocs(q)
+    const outOfStock = []
+
+    productos.docs.forEach((doc) => {
+      const item = order.items.find(prod => prod.id === doc.id)
+      const stock = doc.data().stock
+      if (stock >= item.cantidad) {
+        batch.update(doc.ref, {
+          stock: stock - item.cantidad
+        })
+      } else {
+        outOfStock.push(item)
+      }
+    })
+    if(outOfStock.length===0){
+      await batch.commit()
+      const doc = await addDoc(ordersRef, order)
+      resolve(doc.id)
+      // vaciarCarrito()
+      // setOrderId(doc.id)
+    }else{
+      reject("Hay items sin stock")
+    }
+  })
+}

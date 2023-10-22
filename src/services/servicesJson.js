@@ -15,3 +15,19 @@ export const pedirDatos = (id, type) => {
     }, 500)
   })
 }
+export const createOrder=(order)=>{
+
+  return new Promise(async(resolve,reject)=>{
+
+    setTimeout(() => {
+
+      console.log(order)
+
+      resolve(Math.floor( Math.random() * 10000))
+
+    }, 500)
+
+  })
+
+}
+

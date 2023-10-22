@@ -1,18 +1,43 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { CartContext } from '../context/CartContext'
 
 import { Link } from 'react-router-dom'
 import { CartViewItem } from '../components/Cart/CartViewItem'
 import { MiInputButton } from '../components/ui/MiInputButton'
+import { createOrder } from '../services/servicesFirebase'
 
 export const CartPage = () => {
   const { cart, borrarDelCarrito, vaciarCarrito, totalCompra } = useContext(CartContext)
+  const [orderId, setOrderId] = useState(null)
   const pagar = () => {
-    alert("Gracias Por Su Compra")
-    vaciarCarrito()
+    const orden = {
+      cliente: {
+        nombre: "nombre test",
+        direccion: "direccion test",
+        email: "email test",
+      },
+      items: cart,
+      total: totalCompra(),
+      fecha: new Date()
+    }
+
+    createOrder(orden)
+      .then(res => {
+        vaciarCarrito()
+        setOrderId(res)
+      })
+      .catch(e => alert(e))
   }
-
-
+  if (orderId) {
+    return (
+      <div>
+        <h2>Tu compra se registro exitosamente</h2>
+        <hr />
+        <p>Tu número de orden es: <strong>{orderId}</strong></p>
+        <Link to="/"> <MiInputButton type={'button'} value={"Volver"} myStyles={'w-40'} /></Link>
+      </div>
+    )
+  }
 
   if (cart.length === 0) {
     return (
@@ -20,7 +45,7 @@ export const CartPage = () => {
         <h2> Mi Carrito </h2>
         <p>Carrito vacio</p>
         <Link to={"/"} >
-          <MiInputButton type={'button'} value={"Ir a Comprar"} />
+          <MiInputButton type={'button'} value={"Ir a Comprar"} myStyles={'w-40'} />
         </Link>
       </div>
     )
@@ -42,7 +67,7 @@ export const CartPage = () => {
         </thead>
         <tbody>
           {cart.map((producto, index) => (
-            <CartViewItem producto={producto} index={index} borrarDelCarrito={borrarDelCarrito} />
+            <CartViewItem producto={producto} key={index} borrarDelCarrito={borrarDelCarrito} />
           ))}
           <tr className='border-b border-[#AA5656] mt-5' >
             <td></td>
