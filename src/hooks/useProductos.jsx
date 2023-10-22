@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { pedirDatos } from "../services/servicesJson"
+import { pedirDatos } from "../services/servicesFirebase"
 
 export const useProductos = ({id,type}) => {
   const [productos, setProductos] = useState([])
