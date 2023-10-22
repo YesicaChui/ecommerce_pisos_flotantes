@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom"
-import { signIn, signUp,signOut } from "../services/servicesProvider"
+import { signIn, signUp,signOut,updateUser } from "../services/servicesProvider"
 import { UserContext } from "../context/UserContext"
 import { useContext } from "react"
 export const useUser = () => {
-  const { storeUser,cleanUser } = useContext(UserContext)
+  const {user, storeUser,cleanUser } = useContext(UserContext)
   const navigate = useNavigate()
   const login = async (email, password) => {
     try {
@@ -33,9 +33,24 @@ export const useUser = () => {
       console.log("ocurrio un error:",e)     
     }
   }
+  const saveUser = async(data)=>{
+    try{
+      console.log(data, user.id)
+      await updateUser(data,user.id)
+      storeUser({
+        ...user,
+        ...data
+      })
+    }catch(error){
+      console.log("Ocurrió un error:", error);
+      throw error;
+    }
+  }
   return {
     login,
     logout,
-    register
+    register,
+    user,
+    saveUser,
   }
 }

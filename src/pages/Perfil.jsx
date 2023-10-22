@@ -1,9 +1,9 @@
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { Banner } from '../components/Banner'
-import { UserContext } from "../context/UserContext"
+import { useUser } from '../hooks/useUser'
 
 export const Perfil = () => {
-  const { user } = useContext(UserContext)
+  const { user,saveUser } = useUser()
   const {email, firstname, lastname, address} = user
 
   const [isEditing, setIsEditing] = useState(false);
@@ -15,12 +15,18 @@ export const Perfil = () => {
     setIsEditing(true);
   };
 
-  const handleSaveClick = () => {
-    // Aquí puedes agregar lógica para guardar los cambios en tu base de datos.
-
-    // Actualiza los valores de firstname, lastname y address con los valores editados.
-    // Después, cambia isEditing a false para volver a la visualización de solo lectura.
-    setIsEditing(false);
+  const handleSaveClick = async() => {
+    const data = {
+      firstname:editedFirstname,
+      lastname:editedLastname,
+      address:editedAddress
+    }
+    try {
+      await saveUser(data); // Pasa el user.id como argumento
+      setIsEditing(false);
+    } catch (error) {
+      console.log("Ocurrió un error al actualizar el usuario:", error);
+    }
   };
 
 
@@ -59,7 +65,7 @@ export const Perfil = () => {
                 className="border rounded-md p-1 ml-2"
               />
             </div>
-            <button onClick={handleSaveClick} className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+            <button onClick={()=>handleSaveClick()} className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
               Guardar Cambios
             </button>
           </>

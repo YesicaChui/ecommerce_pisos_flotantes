@@ -1,4 +1,4 @@
-import { collection, doc, documentId, getDoc, getDocs, query, where, writeBatch,addDoc } from "firebase/firestore";
+import { collection, doc, documentId, getDoc, getDocs, query, where, writeBatch,addDoc,updateDoc} from "firebase/firestore";
 import { db } from "./configFirebase";
 import { auth } from "./configFirebase";
 import { createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth"
@@ -131,6 +131,15 @@ export const signOut=async ()=>{
     await auth.signOut()
   }catch(e){
     console.log("ocurrio un error firebase:",e)
+    throw e;
+  }
+}
+export const updateUser = async (data, id) => {
+  try {
+    await updateDoc(doc(db, "users", id), data);
+    return true
+  } catch (e) {
+    console.log("ocurrio un error firebase actualizando:", e)
     throw e;
   }
 }
