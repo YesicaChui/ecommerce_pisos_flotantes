@@ -4,7 +4,7 @@ import { CartContext } from '../context/CartContext'
 import { Link } from 'react-router-dom'
 import { CartViewItem } from '../components/Cart/CartViewItem'
 import { MiInputButton } from '../components/ui/MiInputButton'
-import { createOrder } from '../services/servicesFirebase'
+import { createOrder } from '../services/servicesProvider'
 
 export const CartPage = () => {
   const { cart, borrarDelCarrito, vaciarCarrito, totalCompra } = useContext(CartContext)
