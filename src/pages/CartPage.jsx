@@ -6,16 +6,18 @@ import { Link } from 'react-router-dom'
 import { CartViewItem } from '../components/Cart/CartViewItem'
 import { MiInputButton } from '../components/ui/MiInputButton'
 import { createOrder } from '../services/servicesProvider'
+import { useUser } from '../hooks/useUser'
 
 export const CartPage = () => {
+  const {user} =useUser()
   const { cart, borrarDelCarrito, vaciarCarrito, totalCompra } = useContext(CartContext)
   const [orderId, setOrderId] = useState(null)
   const pagar = () => {
     const orden = {
       cliente: {
-        nombre: "nombre test",
-        direccion: "direccion test",
-        email: "email test",
+        nombre: `${user.firstname} ${user.lastname}`,
+        direccion: user.address,
+        email:user.email,
       },
       items: cart,
       total: totalCompra(),
