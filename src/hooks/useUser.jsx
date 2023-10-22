@@ -1,10 +1,14 @@
 import { useNavigate } from "react-router-dom"
 import { signIn, signUp,signOut } from "../services/servicesProvider"
+import { UserContext } from "../context/UserContext"
+import { useContext } from "react"
 export const useUser = () => {
+  const { storeUser,cleanUser } = useContext(UserContext)
   const navigate = useNavigate()
   const login = async (email, password) => {
     try {
-      await signIn( email, password)
+      const miuser=await signIn( email, password)
+      storeUser(miuser)
       navigate('/')
     } catch (e) {
       console.log("ocurrio un error:", e)
@@ -12,7 +16,8 @@ export const useUser = () => {
   }
   const register = async (email, password) => {
     try {
-      await signUp( email, password)
+      const miuser=await signUp( email, password)
+      storeUser(miuser)
       navigate('/')
     } catch (e) {
       console.log("ocurrio un error:", e)
@@ -22,10 +27,10 @@ export const useUser = () => {
   const logout = async () => {
     try{
       await signOut()
+      cleanUser()
       navigate('/login')
     }catch(e){
-      console.log("ocurrio un error:",e)
-      throw e;
+      console.log("ocurrio un error:",e)     
     }
   }
   return {

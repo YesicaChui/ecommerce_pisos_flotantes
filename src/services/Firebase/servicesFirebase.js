@@ -75,9 +75,13 @@ export const signIn=async (email,password)=>{
   try{
     const credentialsUser = await signInWithEmailAndPassword(auth, email, password)
     const user = credentialsUser.user;
+    const miuser = {
+      email: user.email,
+      id: user.uid
+    }
     console.log("los credenciales user son:", user)
     console.log("los credenciales son:", credentialsUser) 
-    return user
+    return miuser
   }catch(e){
     console.log("ocurrio un error firebase:",e)
     throw e;
@@ -87,9 +91,13 @@ export const signUp=async (email,password)=>{
   try{
     const credentialsUser = await createUserWithEmailAndPassword(auth, email, password)
     const user = credentialsUser.user;
+    const miuser = {
+      email: user.email,
+      id: user.uid
+    }
     console.log("los credenciales user son:", user)
     console.log("los credenciales son:", credentialsUser) 
-    return user
+    return miuser
   }catch(e){
     console.log("ocurrio un error firebase:",e)
     throw e;

@@ -1,43 +1,62 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import account from '../assets/mdi_account-alert-outline.png'
 import search from '../assets/akar-icons_search.png'
 import heart from '../assets/akar-icons_heart.png'
 import cart from '../assets/ant-design_shopping-cart-outlined.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { CartWidget } from './CartWidget'
+import { UserContext } from '../context/UserContext'
+import { useUser } from '../hooks/useUser'
 
 export const Header = () => {
+  const { logout } = useUser()
+  const { user, cleanUser } = useContext(UserContext)
+  const navigate = useNavigate()
+  const handleLogout = () => {
+    logout()
+    cleanUser()
+    navigate('/login')
+  }
   return (
     <header className='flex justify-between pt-5 px-10 items-center'>
       <h1>Ecommerce</h1>
       <nav className='flex justify-between gap-10'>
-      <Link to={"/"}>Inicio</Link>
+        <Link to={"/"}>Inicio</Link>
         <Link to={"/"}>Tienda</Link>
-        <Link to={"/"}>Acerca De</Link>
-        <Link to={"/"}>Contacto</Link>
+        <Link to={"/"}>Administrar Productos</Link>
+        <Link to={"/"}>Administrar Categorias</Link>
       </nav>
-      <div  className='flex justify-between gap-10 items-center'>
+      <div className='flex justify-between gap-10 items-center'>
         <img src={search} alt="" />
         <div className='group relative'>
-          <img src={account} alt="" />
-          <div id="dropdownNavbar" className="z-10 hidden absolute group-hover:block font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-            <ul className="py-2 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
-              <li>
-                <Link to={"/login"} className="block px-4 py-2 hover:bg-gray-100 ">Ingresar </Link>
-              </li>
-              <li>
-                <Link to={"/registro"} className="block px-4 py-2 hover:bg-gray-100 ">Registrarse </Link>
-              </li>
-              <li>
-                <a href="#" className="block px-4 py-2 hover:bg-gray-100 ">Mi Perfil</a>
-              </li>
+          {!user
+            ? <img src={account} alt="" />
+            : <div className='bg-blue-500 rounded-full w-7 h-7 flex justify-center items-center font-bold text-teal-50 capitalize'>{user.email[0]}</div>}
+
+          <div id="dropdownNavbar" className="z-10 hidden absolute group-hover:block  bg-white  rounded-lg shadow w-32">
+            <ul className="py-2 text-sm text-gray-700 dark:text-gray-400" >
+              {!user
+                ? <>
+                  <li>
+                    <Link to={"/login"} className="block px-4 py-2 hover:bg-gray-100 ">Ingresar </Link>
+                  </li>
+                  <li>
+                    <Link to={"/registro"} className="block px-4 py-2 hover:bg-gray-100 ">Registrarse </Link>
+                  </li>
+                </>
+                : <>
+                  <li>
+                    <a href="#" className="block px-4 py-2 hover:bg-gray-100 ">Mi Perfil</a>
+                  </li>
+                  <div className="py-1 ">
+                    <div className="block px-4 py-2 text-sm  hover:bg-gray-100 cursor-pointer" onClick={handleLogout} >Cerrar Sesion</div>
+                  </div>
+                </>
+              }
             </ul>
-            <div className="py-1">
-              <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Cerrar Sesion</a>
-            </div>
           </div>
         </div>
-        <img src={heart} alt="" />
+        {user ? <img src={heart} alt="" /> : ""}
         <Link to={"/cart"}>
           {<CartWidget />}
         </Link>
