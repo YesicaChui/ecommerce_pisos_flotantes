@@ -4,7 +4,6 @@ import { VitePWA } from 'vite-plugin-pwa'
 // https://vitejs.dev/config/
 const manifestForPlugIn = {
   registerType: 'prompt',
-  includeAssests: ['favicon.ico', "apple-touc-icon.png", "masked-icon.svg"],
   manifest: {
     name: "React-vite-app",
     short_name: "react-vite-app",
@@ -27,12 +26,6 @@ const manifestForPlugIn = {
       type: 'image/png',
       purpose: 'apple touch icon',
     },
-    {
-      src: '/maskable_icon.jpg',
-      sizes: '512x512',
-      type: 'image/jpg',
-      purpose: 'any maskable',
-    }
     ],
     theme_color: '#171717',
     background_color: '#f0e7db',
