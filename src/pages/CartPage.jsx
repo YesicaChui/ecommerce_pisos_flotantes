@@ -56,9 +56,9 @@ export const CartPage = () => {
   return (
     <div>
       <Banner text={"Mi Carrito"}/>
-      <table className='mx-auto mt-5'>
+      <table className='mx-auto mt-5' role="table">
         <thead>
-          <tr className='border-b-2 border-[#AA5656]'>
+          <tr className='border-b-2 border-[#AA5656]'  role="row">
             <th>Nº</th>
             <th>Imagen</th>
             <th>Nombre</th>
