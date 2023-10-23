@@ -22,17 +22,16 @@ export const Header = () => {
   return (
     <header className='flex justify-between pt-5 px:-1 md:px-10 items-center'>
       <div className='flex items-center gap-5'>
-        <img src={logo} alt="logo de la empresa" width={"80px"} />
+        <Link to={"/"}><img src={logo} alt="logo de la empresa" width={"80px"} /></Link>
+
       </div>
-      <div className='relative'>
-        <div className='md:hidden '>
-          <button
-            onClick={() => setMenuOpen(!isMenuOpen)}
-            className='text-2xl'
-          >
-            &#9776;
-          </button>
-        </div>
+      <div className='relative md:hidden '>
+        <button
+          onClick={() => setMenuOpen(!isMenuOpen)}
+          className='text-2xl'
+        >
+          &#9776;
+        </button>
         {isMenuOpen && (
           <div className='md:hidden absolute z-10 w-48 left-[-80px]'>
             <ul className='bg-white p-4 rounded-lg shadow flex flex-col gap-5 '>
