@@ -41,3 +41,13 @@
   color: #888;
 }
 
+/* Define la animación de zoom */
+.zoom-in {
+  transition: transform 0.2s;
+}
+
+/* Cuando se pasa el mouse sobre la tarjeta, aplícale la animación */
+.zoom-in:hover {
+  transform: scale(1.05); /* Puedes ajustar el valor según lo desees */
+}
+

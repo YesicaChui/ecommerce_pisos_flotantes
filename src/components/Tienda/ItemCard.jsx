@@ -6,7 +6,7 @@ import { MiInputButton } from '../ui/MiInputButton'
 export const ItemCard = ({ producto }) => {
   return (
 
-    <div className='text-center bg-slate-300 p-2 rounded-xl'>
+    <div className='text-center bg-slate-300 p-2 rounded-xl zoom-in'>
       <h4 className='text-2xl font-bold text-red-600'>{producto.nombre}</h4>
       <img src={producto.imagen} alt={producto.nombre} className='mx-auto rounded-lg my-3' />
       <p className='text-xl font-bold'>S/.{producto.precio}</p>
