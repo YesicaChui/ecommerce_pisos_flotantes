@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom"
 import { signIn, signUp,signOut,updateUser } from "../services/servicesProvider"
 import { UserContext } from "../context/UserContext"
 import { useContext } from "react"
+import Swal from 'sweetalert2';
 export const useUser = () => {
   const {user, storeUser,cleanUser } = useContext(UserContext)
   const navigate = useNavigate()
@@ -12,7 +13,11 @@ export const useUser = () => {
       storeUser(miuser)
       navigate('/')
     } catch (e) {
-      console.log("ocurrio un error:", e)
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: e.message,
+      });
     }
   }
   const register = async (form) => {
@@ -22,6 +27,11 @@ export const useUser = () => {
       navigate('/')
     } catch (e) {
       console.log("ocurrio un error:", e)
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: e.message,
+      });
     }
   }
 

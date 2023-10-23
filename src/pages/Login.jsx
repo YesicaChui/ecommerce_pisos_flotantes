@@ -4,7 +4,6 @@ import { Banner } from '../components/Banner'
 import { MiInputButton } from '../components/ui/MiInputButton'
 import { useUser } from '../hooks/useUser'
 import { Link } from 'react-router-dom'
-
 export const Login = () => {
   const {login} = useUser()
   const [form, setForm] = useState({

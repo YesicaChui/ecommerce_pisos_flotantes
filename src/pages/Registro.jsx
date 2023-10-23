@@ -6,7 +6,7 @@ import { useUser } from '../hooks/useUser'
 import { Link } from 'react-router-dom'
 
 export const Registro = () => {
-  const {register} = useUser()
+  const { register } = useUser()
   const [form, setForm] = useState({
     email: '',
     password: '',
@@ -25,7 +25,6 @@ export const Registro = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     await register(form)
-
   }
 
   return (
@@ -36,9 +35,9 @@ export const Registro = () => {
         <MiInput type={'text'} placeholder={'Nombre'} name={"firstname"} onChange={handleChange} value={form?.firstname} />
         <MiInput type={'text'} placeholder={'Apellidos'} name={"lastname"} onChange={handleChange} value={form?.lastname} />
         <MiInput type={'text'} placeholder={'Dirección de Envio'} name={"address"} onChange={handleChange} value={form?.address} />
-        <MiInput type={'email'} placeholder={'Correo'} name={"email"} onChange={handleChange} value={form?.email}/>
+        <MiInput type={'email'} placeholder={'Correo'} name={"email"} onChange={handleChange} value={form?.email} />
         <MiInput type={'password'} placeholder={'Contraseña'} name={"password"} onChange={handleChange} value={form?.password} />
-        <MiInputButton type={"submit"} value={"Registro"} myStyles={'mb-1 w-full'}/>
+        <MiInputButton type={"submit"} value={"Registro"} myStyles={'mb-1 w-full'} />
         <Link to={"/login"}><MiInputButton type={"button"} value={"Volver"} myStyles={'bg-green-500 w-full'} /></Link>
 
       </form>

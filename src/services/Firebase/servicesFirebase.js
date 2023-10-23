@@ -73,7 +73,9 @@ export const createOrder=(order)=>{
 
 export const signIn=async (email,password)=>{
   try {
+    console.log("tester1")
     await signInWithEmailAndPassword(auth, email, password)
+    console.log("tester2")
     //recuperando datos de la base de datos
     const userRef = collection(db, "users")
     const consulta = query(userRef, where("email", "==", email))
@@ -98,7 +100,7 @@ export const signIn=async (email,password)=>{
 
   }catch(e){
     console.log("ocurrio un error firebase:",e)
-    throw e;
+    throw new Error("Ocurrió un error al iniciar sesión. Verifica tus credenciales e inténtalo de nuevo.");
   }
 }
 export const signUp=async (form)=>{
