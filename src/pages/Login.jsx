@@ -29,7 +29,7 @@ export const Login = () => {
     <>
       <Banner text={"Bienvenido"} />
       <form className='bg-white w-80 mx-auto mt-8 rounded p-6' onSubmit={handleSubmit}>
-        <h2 className='text-2xl font-bold mb-4 text-center' >Login</h2>
+        <h2 className='text-2xl font-bold mb-4 text-center' >Ingreso</h2>
         <MiInput type={'email'} placeholder={'Correo'} name={"email"} onChange={handleChange} value={form?.email} />
         <MiInput type={'password'} placeholder={'Contraseña'} name={"password"} onChange={handleChange} value={form?.password} />
         <MiInputButton type={"submit"} value={"Ingresar"} myStyles={'mb-1 w-full'} />
